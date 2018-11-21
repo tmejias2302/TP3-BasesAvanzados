@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TripTEC.Models.ReservationModel>
+@{
+    ViewBag.Title = "Reservaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/Content/Flatly.css">
+</head>
+<h2>Historial de reservaciones</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.reservacionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombreCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidadPersonas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaLlegada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaSalida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sitioTuristico)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.reservacionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidadPersonas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaLlegada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaSalida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sitioTuristico)
+        </td>
+    </tr>
+    }
+</table>

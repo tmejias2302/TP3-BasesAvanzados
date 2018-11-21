@@ -1,0 +1,52 @@
+﻿@model TripTEC.Models.ReservationModel
+@{
+    ViewBag.Title = "query4";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    
+    function getCommonClients() {
+        var selectedText = dropdownClients.value;
+        location.href = '@Url.Action("getCommonClients", "Queries")?nombreCliente=' + selectedText;
+    }
+</script>
+
+<head>
+    <link rel="stylesheet" href="~/Content/Flatly.css">
+</head>
+<hr>
+<h4>Clientes en común</h4>
+
+@using (Html.BeginForm())
+{
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.nombreCliente, new { id = "ID", @readonly = "readonly", style = "width:100px;", @class = "hidden" })
+                @Html.ValidationMessageFor(model => model.nombreCliente, "", new { @class = "text-danger" })
+                <select class="form-control" id="dropdownClients" >
+                    <option value=-1></option>
+                    @foreach (var item in ViewBag.Clients)
+                    {
+                        <option value=@item.nombre>@item.nombre</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Consultar" class="btn btn-default" onclick="getCommonClients()"/>
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "selectQuery")
+</div>

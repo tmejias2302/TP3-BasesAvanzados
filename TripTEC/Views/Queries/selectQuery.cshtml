@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "selectQuery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Flatly.css">
+    <link rel="stylesheet" type="text/css" href="http//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</head>
+<br>
+<h2>Realizar consultas</h2>
+<div> <HR><br> </div>
+
+
+
+<a class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("query1", "Queries") + "'");"><span class="glyphicon glyphicon-leaf"></span>Historial de reservaciones de un cliente</a>
+
+
+<div> <br><br>  </div>
+
+<a class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("getReservationsSites", "Queries") + "'");"><span class="glyphicon glyphicon-leaf"></span>Sitios en los que los clientes han hecho reservaciones</a>
+
+
+
+
+<div> <br><br>  </div>
+
+<a class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("getMostVisitedReservationsSites", "Queries") + "'");"><span class="glyphicon glyphicon-leaf"></span>5 sitios para los que se han registrado más reservaciones</a>
+
+
+
+
+<div> <br><br>  </div>
+
+<a class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("query4", "Queries") + "'");"><span class="glyphicon glyphicon-leaf"></span>Reservaciones en común con ese cliente</a>
+
+
+<div>
+    @Html.ActionLink("Volver", "Index", "Main")
+</div>
+
+

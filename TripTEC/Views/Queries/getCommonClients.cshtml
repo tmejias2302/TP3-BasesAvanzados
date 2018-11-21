@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TripTEC.Models.ClientModel>
+@{
+    ViewBag.Title = "Clientes en común";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/Content/Flatly.css">
+</head>
+<h2>Clientes en común</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+    </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Regresar", "selectQuery")
+</div>

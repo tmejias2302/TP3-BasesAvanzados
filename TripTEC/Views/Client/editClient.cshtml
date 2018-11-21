@@ -1,0 +1,134 @@
+﻿@model TripTEC.Models.ClientModel
+
+@{
+    ViewBag.Title = "editClient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    function add_row() {
+        var new_name = document.getElementById("favCell").value;
+        if (new_name!=""){
+            var table = document.getElementById("data_table");
+            var table_len = (table.rows.length) - 1;
+
+            var row = table.insertRow(table_len).outerHTML = "<tr id='row" + table_len + "'><td id='name_row" + table_len + "'>"
+                + new_name + "</td><td><input type='button' id='edit_button" + table_len
+                + "' value='Edit' class='btn btn-default' onclick='edit_row(" + table_len + ")'> <input type='button' id='save_button"
+                + table_len + "' value='Save' class='btn btn-warning' onclick='save_row("
+                + table_len + ")'> <input type='button' value='Delete' class='btn btn-default' onclick='delete_row("
+                + table_len + ")'></td></tr>";
+
+           document.getElementById("save_button" + table_len).style.display = "none";
+            document.getElementById("favCell").value = "";
+        }
+    }
+
+
+
+    function delete_row(no) {
+        document.getElementById("row" + no + "").outerHTML = "";
+        addFavoriteToList();
+    }
+
+    function edit_row(no) {
+        document.getElementById("edit_button" + no).style.display = "none";
+        document.getElementById("save_button" + no).style.display = "inline-table";
+
+        var name = document.getElementById("name_row" + no);
+        var name_data = name.innerHTML;
+        name.innerHTML = "<input type='text' id='name_text" + no + "' value='" + name_data + "'>";
+        //addFavoriteToList();
+
+    }
+
+    function save_row(no) {
+        var name_val = document.getElementById("name_text" + no).value;
+        document.getElementById("name_row" + no).innerHTML = name_val;
+        document.getElementById("edit_button" + no).style.display = "inline-table";
+        document.getElementById("save_button" + no).style.display = "none";
+        addFavoriteToList();
+    }
+   
+</script>
+
+
+<head>
+    <link rel="stylesheet" href="~/Content/Flatly.css">
+</head>
+
+<body onload="loadPage()">
+    <h2>Editar cliente</h2>
+
+    @using (Html.BeginForm("editClient", "Client", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <hr />
+            <h4>Datos Personales</h4>           
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.apellidos, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.correo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cedula, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cedula, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.cedula, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fechaNacimiento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save"  class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+ </body>

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<TripTEC.Models.TouristicSiteModel>
+
+@{
+    ViewBag.Title = "Sitios turísticos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/Flatly.css">
+</head>
+
+<h2>Sitios turísticos</h2>
+
+<p>
+    @{
+        if (Request.Cookies["userType"] != null)
+        {
+            if (Request.Cookies["userType"].Value == "Empleado")
+            {
+                @Html.ActionLink("Agregar nuevo sitio turístico", "createTouristicSite")
+            }            
+        }
+    }
+</p>
+
+
+<table class="table">
+    <tr>              
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actividades)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>           
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.actividades)
+        </td>
+        <td> 
+            @{
+                if (Request.Cookies["userType"] != null)
+                {
+                    if (Request.Cookies["userType"].Value == "Empleado")
+                    {
+                        @Html.ActionLink("Editar", "editTouristicSite", routeValues: new { id = item._id })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Realizar Reservación", "makeSiteReservation", routeValues: new { id = item._id })
+                    }
+                }
+            } 
+            
+        </td>
+    </tr>
+}
+
+</table>
